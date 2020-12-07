@@ -90,4 +90,9 @@ public interface RxApis {
     @POST("/jvtc/FDYDisAllLeave")
     @Headers({"User-Agent:jiu-shi","Content-Type:application/json"})
     Observable<JSONObject> FDYDisAllLeave(@Header("Authorization") String token,@Body RequestBody req);
+
+    @GET("/getAllSystemNotice")
+    @Headers("source:jiu-shi")
+    Observable<JSONObject> getAllSystemNotice();
+
 }

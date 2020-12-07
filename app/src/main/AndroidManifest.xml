@@ -20,8 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CatCampus_Teacher"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.holimanager.DestructionActivity"></activity>
-        <activity android:name=".ui.holimanager.ReViewActivity"></activity>
+        <activity android:name=".ui.notice.NoticeActivity"></activity>
+        <activity android:name=".ui.holimanager.DestructionActivity" />
+        <activity android:name=".ui.holimanager.ReViewActivity" />
         <activity android:name=".ui.updatepass.XgUpdatepassActivity" />
         <activity android:name=".ui.studentupdatepass.StudentUpdatePassActivity" />
         <activity android:name=".ui.login.LoginActivity2" />

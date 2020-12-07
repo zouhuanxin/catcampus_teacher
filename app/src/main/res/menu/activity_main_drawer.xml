@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <group android:checkableBehavior="single">
+    <group>
         <item
-            android:id="@+id/消息"
+            android:id="@+id/msg"
             android:icon="@mipmap/message"
             android:title="消息" />
         <item
