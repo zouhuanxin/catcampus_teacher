@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ImageView
+        android:src="@mipmap/h_bg"
+        android:layout_gravity="right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </ImageView>
+
+    <ImageView
+        android:src="@mipmap/f_bg"
+        android:layout_gravity="bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </ImageView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_marginTop="@dimen/dp_150"
+                android:text="LOGIN"
+                android:textStyle="bold"
+                android:textColor="#f0f0f0"
+                android:textSize="@dimen/sp_70"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+            <TextView
+                android:layout_marginTop="@dimen/dp_195"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:text="九小师-登录"
+                android:textSize="@dimen/sp_23"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+        </FrameLayout>
+
+        <com.kproduce.roundcorners.RoundLinearLayout
+            app:rRadius="@dimen/dp_10"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_30"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#f9f9f9">
+            <TextView
+                android:paddingTop="@dimen/dp_5"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:text="教职工账号"
+                android:textColor="#888888"
+                android:textSize="@dimen/sp_13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+            <EditText
+                android:id="@+id/account"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:textColor="#333333"
+                android:inputType="number"
+                android:maxLines="1"
+                android:maxLength="11"
+                android:textSize="@dimen/sp_19"
+                android:textStyle="bold"
+                android:background="#f9f9f9"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_35" />
+        </com.kproduce.roundcorners.RoundLinearLayout>
+
+
+        <com.kproduce.roundcorners.RoundLinearLayout
+            app:rRadius="@dimen/dp_10"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_30"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#f9f9f9">
+            <TextView
+                android:paddingTop="@dimen/dp_5"
+                android:text="教职工教务密码"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:textColor="#888888"
+                android:textSize="@dimen/sp_13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+            <EditText
+                android:id="@+id/password"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:textColor="#333333"
+                android:maxLines="1"
+                android:textSize="@dimen/sp_19"
+                android:textStyle="bold"
+                android:background="#f9f9f9"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_35" />
+        </com.kproduce.roundcorners.RoundLinearLayout>
+
+        <TextView
+            android:id="@+id/agreement"
+            android:textColor="#888888"
+            android:textSize="@dimen/sp_12"
+            android:layout_margin="@dimen/dp_10"
+            android:gravity="center"
+            android:text="登录即代表您已阅读并同意《九小师隐私协议》"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
+
+        <FrameLayout
+            android:animateLayoutChanges="true"
+            android:layout_marginTop="@dimen/dp_30"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.kproduce.roundcorners.RoundButton
+                android:id="@+id/login"
+                app:rRadius="@dimen/dp_100"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:background="#fa4169"
+                android:layout_width="@dimen/dp_250"
+                android:layout_height="@dimen/dp_45"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold"
+                android:text="登录"/>
+
+            <ProgressBar
+                android:id="@+id/loading"
+                android:visibility="gone"
+                android:layout_marginLeft="@dimen/dp_70"
+                android:layout_gravity="center|left"
+                android:layout_width="@dimen/dp_25"
+                android:layout_height="@dimen/dp_25">
+            </ProgressBar>
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:text="©2020软件协会&amp;不才网络工作室"
+        android:textColor="#888888"
+        android:gravity="center"
+        android:textSize="@dimen/sp_12"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_gravity="center|bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </TextView>
+
+</FrameLayout>

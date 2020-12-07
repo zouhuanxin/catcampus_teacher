@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/groupitem_text"
+        android:text="hallo"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:gravity="center|left"
+        android:textColor="#333333"
+        android:textStyle="bold"
+        android:textSize="@dimen/sp_15"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45">
+    </TextView>
+
+</LinearLayout>
