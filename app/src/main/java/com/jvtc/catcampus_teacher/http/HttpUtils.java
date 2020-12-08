@@ -19,7 +19,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class HttpUtils {
-    public static String baseUrl = "http://192.168.123.196:8084";
+    public static String baseUrl = "http://192.168.1.109:8084";
     public static String notbucaiUrl = "https://jvtc.notbucai.com";
     public static String ncgameUrl = "https://api.ncgame.cc";
 

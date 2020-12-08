@@ -36,6 +36,8 @@ import com.jvtc.catcampus_teacher.ui.login.LoginViewModelFactory;
 import com.jvtc.catcampus_teacher.ui.web.X5WebViewActivity;
 import com.jvtc.catcampus_teacher.util.NavigationManager;
 import com.jvtc.catcampus_teacher.util.PermissionUtils;
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.beta.Beta;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -58,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         initView();
         initData();
     }
+
 
     private void initView(){
         accountEditText = findViewById(R.id.account);

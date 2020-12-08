@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.jvtc.catcampus_teacher">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -7,6 +8,8 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
         android:name=".app.MyApplication"
@@ -20,6 +23,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CatCampus_Teacher"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent" />
         <activity android:name=".ui.notice.NoticeActivity"></activity>
         <activity android:name=".ui.holimanager.DestructionActivity" />
         <activity android:name=".ui.holimanager.ReViewActivity" />
@@ -49,6 +56,18 @@
         <meta-data
             android:name="notch.config"
             android:value="portrait|landscape" />
+
+        <!--如果您想兼容Android N或者以上的设备，必须要在AndroidManifest.xml文件中配置FileProvider来访问共享路径的文件-->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.jvtc.catcampus_teacher.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"
+                tools:replace="name,resource"/>
+        </provider>
     </application>
 
 </manifest>
