@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ImmersionBar.with(this).init();
-        new PermissionUtils().verifyStoragePermissions(this,null);
+        new PermissionUtils().verifyStoragePermissions(this, null);
         setContentView(R.layout.activity_login);
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory()).get(LoginViewModel.class);
         initView();
@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private void initView(){
+    private void initView() {
         accountEditText = findViewById(R.id.account);
         passwordEditText = findViewById(R.id.password);
         loginButton = findViewById(R.id.login);
@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         agreement = findViewById(R.id.agreement);
     }
 
-    private void initData(){
+    private void initData() {
         agreement.setText(Html.fromHtml("登录即代表您已阅读并同意<font color='#4678ff'>《九小师隐私协议》</font>"));
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
@@ -124,8 +124,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, X5WebViewActivity.class);
-                intent.putExtra("title","《九小师隐私协议》");
-                intent.putExtra("url","https://v.ncgame.cc/service.html");
+                intent.putExtra("title", "《九小师隐私协议》");
+                intent.putExtra("url", "https://v.ncgame.cc/service.html");
                 startActivity(intent);
             }
         });
@@ -133,27 +133,37 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(accountEditText.getText())){
+                if (TextUtils.isEmpty(accountEditText.getText())) {
                     showLoginFailed("请输入账号");
                     return;
                 }
-                if (TextUtils.isEmpty(passwordEditText.getText())){
+                if (TextUtils.isEmpty(passwordEditText.getText())) {
                     showLoginFailed("请输入密码");
                     return;
                 }
                 Boolean status = loginViewModel.login(accountEditText.getText().toString(), passwordEditText.getText().toString());
-                if (status){
+                if (status) {
                     loginButton.setEnabled(false);
                     loadingProgressBar.setVisibility(View.VISIBLE);
                 }
             }
         });
-
-        if (LoginRepository.getInstance().getLoggedInUser() != null && !TextUtils.isEmpty(LoginRepository.getInstance().getLoggedInUser().getCookie())){
+        //已存在登录信息时候，自动填写账号密码信息
+        if (LoginRepository.getInstance().getLoggedInUser() != null
+                && !TextUtils.isEmpty(LoginRepository.getInstance().getLoggedInUser().getCookie())) {
+            accountEditText.setText(LoginRepository.getInstance().getLoggedInUser().getAccount());
+            passwordEditText.setText(LoginRepository.getInstance().getLoggedInUser().getPassword());
+        }
+        //是否自动登录教务系统
+        if (LoginRepository.getInstance().getLoggedInUser() != null
+                && LoginRepository.getInstance().getLoggedInUser().getCookie() != null
+                && !TextUtils.isEmpty(LoginRepository.getInstance().getLoggedInUser().getCookie())
+                && LoginRepository.getInstance().getLoggedInUser().getAuto() != null
+                && LoginRepository.getInstance().getLoggedInUser().getAuto()) {
             Boolean status = loginViewModel.login(
                     LoginRepository.getInstance().getLoggedInUser().getAccount(),
                     LoginRepository.getInstance().getLoggedInUser().getPassword());
-            if (status){
+            if (status) {
                 loginButton.setEnabled(false);
                 loadingProgressBar.setVisibility(View.VISIBLE);
             }

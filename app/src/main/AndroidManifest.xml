@@ -23,11 +23,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CatCampus_Teacher"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ui.setting.SettingActivity"></activity>
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
             android:theme="@android:style/Theme.Translucent" />
-        <activity android:name=".ui.notice.NoticeActivity"></activity>
+        <activity android:name=".ui.notice.NoticeActivity" />
         <activity android:name=".ui.holimanager.DestructionActivity" />
         <activity android:name=".ui.holimanager.ReViewActivity" />
         <activity android:name=".ui.updatepass.XgUpdatepassActivity" />
@@ -55,9 +56,7 @@
             android:value="true" /> <!-- 适配小米（xiaomi）刘海屏 -->
         <meta-data
             android:name="notch.config"
-            android:value="portrait|landscape" />
-
-        <!--如果您想兼容Android N或者以上的设备，必须要在AndroidManifest.xml文件中配置FileProvider来访问共享路径的文件-->
+            android:value="portrait|landscape" /> <!-- 如果您想兼容Android N或者以上的设备，必须要在AndroidManifest.xml文件中配置FileProvider来访问共享路径的文件 -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.jvtc.catcampus_teacher.fileProvider"
@@ -66,7 +65,7 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths"
-                tools:replace="name,resource"/>
+                tools:replace="name,resource" />
         </provider>
     </application>
 

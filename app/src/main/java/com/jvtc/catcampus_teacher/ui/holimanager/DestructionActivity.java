@@ -91,7 +91,7 @@ public class DestructionActivity extends AppCompatActivity implements View.OnCli
 
     private void initAdapter(List<DestructionModel.DestructionItem> list) {
         progress.setVisibility(View.GONE);
-        if (list == null){
+        if (list == null || list.size() == 0){
             Toast.makeText(DestructionActivity.this,"暂无销假信息",Toast.LENGTH_SHORT).show();
             return;
         }

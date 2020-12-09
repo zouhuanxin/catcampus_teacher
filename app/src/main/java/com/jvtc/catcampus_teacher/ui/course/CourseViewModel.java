@@ -105,6 +105,7 @@ public class CourseViewModel extends ViewModel {
                 try {
                     courseWeek.totalWeek = jsonObject.getInt("totalWeek");
                     courseWeek.currentWeek = jsonObject.getInt("currentWeek");
+                    courseWeek.currentDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

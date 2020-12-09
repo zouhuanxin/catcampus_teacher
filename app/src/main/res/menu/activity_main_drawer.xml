@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <group>
-        <item
-            android:id="@+id/msg"
-            android:icon="@mipmap/message"
-            android:title="消息" />
+<!--        <item-->
+<!--            android:id="@+id/msg"-->
+<!--            android:icon="@mipmap/message"-->
+<!--            android:title="消息" />-->
         <item
             android:id="@+id/notice"
             android:icon="@mipmap/notice"

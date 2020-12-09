@@ -2,7 +2,9 @@ package com.jvtc.catcampus_teacher;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +21,7 @@ import com.jvtc.catcampus_teacher.ui.course.CourseFragment;
 import com.jvtc.catcampus_teacher.ui.home.HomeFragment;
 import com.jvtc.catcampus_teacher.ui.hot.HotFragment;
 import com.jvtc.catcampus_teacher.ui.notice.NoticeActivity;
+import com.jvtc.catcampus_teacher.ui.setting.SettingActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawer;
     private NavigationView navView;
     private Intent intent;
+    //记录用户首次点击返回键的时间
+    private long firstTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(new CourseFragment());
         fragments.add(new HotFragment());
         viewPager2.setAdapter(new MyFragmentStateAdapter(this, fragments));
+        viewPager2.setUserInputEnabled(false);
 
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -81,15 +87,16 @@ public class MainActivity extends AppCompatActivity {
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.msg:
-
-                        break;
+//                    case R.id.msg:
+//
+//                        break;
                     case R.id.notice:
                         intent = new Intent(MainActivity.this, NoticeActivity.class);
                         startActivity(intent);
                         break;
                     case R.id.setting:
-
+                        intent = new Intent(MainActivity.this, SettingActivity.class);
+                        startActivity(intent);
                         break;
                 }
                 return true;
@@ -131,4 +138,19 @@ public class MainActivity extends AppCompatActivity {
         return drawer;
     }
 
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+            long secondTime = System.currentTimeMillis();
+            if (secondTime - firstTime > 2000) {
+                Toast.makeText(MainActivity.this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                firstTime = secondTime;
+                return true;
+            } else {
+                finish();
+            }
+        }
+
+        return super.onKeyUp(keyCode, event);
+    }
 }

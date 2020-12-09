@@ -110,6 +110,7 @@
                 android:id="@+id/password"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:textColor="#333333"
+                android:inputType="textPassword"
                 android:maxLines="1"
                 android:textSize="@dimen/sp_19"
                 android:textStyle="bold"

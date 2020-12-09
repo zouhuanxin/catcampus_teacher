@@ -1,5 +1,7 @@
 package com.jvtc.catcampus_teacher.data;
 
+import android.text.TextUtils;
+
 import com.jvtc.catcampus_teacher.app.MyApplication;
 import com.jvtc.catcampus_teacher.data.model.LoggedInUser;
 import com.jvtc.catcampus_teacher.http.HttpCallBack;
@@ -78,11 +80,7 @@ public class LoginRepository {
                                 user.setAccount(account);
                                 user.setPassword(password);
                                 user.setCookie(jsonObject.getString("cookie"));
-                                //第一次登录的时候没有这个信息不进行保存
-                                if (LoginRepository.getInstance().getLoggedInUser() != null){
-                                    user.setPassword2(LoginRepository.getInstance().getLoggedInUser().getPassword2());
-                                    user.setCookie2(LoginRepository.getInstance().getLoggedInUser().getCookie2());
-                                }
+                                CheckConfiguration();
                                 setLoggedInUser(user);
                                 httpCallBack.onSuccess(new Result.Success<>(user));
                             } else {
@@ -93,7 +91,30 @@ public class LoginRepository {
                         }
                     }
                 });
+    }
 
+    private void CheckConfiguration(){
+        //当第一次登录这个账号当时候进行配置初始化
+        if (LoginRepository.getInstance().getLoggedInUser() == null){
+            user.setAuto(true);
+            user.setAuto2(true);
+        }
+        //这个时候已经是教务系统或者学工平台已经登录过的状态
+        //当学工平台已经登录的时候进行保存，以免覆盖
+        if (LoginRepository.getInstance().getLoggedInUser() != null
+                && !TextUtils.isEmpty(LoginRepository.getInstance().getLoggedInUser().getCookie2())){
+            user.setPassword2(LoginRepository.getInstance().getLoggedInUser().getPassword2());
+            user.setCookie2(LoginRepository.getInstance().getLoggedInUser().getCookie2());
+            user.setAuto(LoginRepository.getInstance().getLoggedInUser().getAuto());
+            user.setAuto2(LoginRepository.getInstance().getLoggedInUser().getAuto2());
+        }
+        //检查配置是否错误
+        if (user.getAuto() == null){
+            user.setAuto(true);
+        }
+        if (user.getAuto2() == null){
+            user.setAuto2(true);
+        }
     }
 
 }

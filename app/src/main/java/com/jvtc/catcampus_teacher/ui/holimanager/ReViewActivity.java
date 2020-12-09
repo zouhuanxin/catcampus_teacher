@@ -149,6 +149,10 @@ public class ReViewActivity extends AppCompatActivity implements View.OnClickLis
 
     private void initAdapter(List<ReViewModel.ReViewItem> list) {
         progress.setVisibility(View.GONE);
+        if (list == null || list.size() == 0){
+            Toast.makeText(ReViewActivity.this,"没有信息",Toast.LENGTH_SHORT).show();
+            return;
+        }
         ReViewAdapter adapter = new ReViewAdapter(list, new ReViewAdapter.ItemClick() {
             @Override
             public void Click(int type, ReViewModel.ReViewItem item) {

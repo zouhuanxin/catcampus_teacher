@@ -5,6 +5,7 @@ import android.content.Context;
 
 import androidx.multidex.MultiDex;
 
+import com.jvtc.catcampus_teacher.R;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.crashreport.CrashReport;
@@ -17,8 +18,12 @@ public class MyApplication extends Application {
         super.onCreate();
         myApplication = this;
 
-       // CrashReport.initCrashReport(getApplicationContext(), "ab82a4ef2b", true);
-       // CrashReport.initCrashReport(getApplicationContext());
+        Beta.autoInit = true;
+        Beta.autoCheckUpgrade = true;
+        Beta.upgradeCheckPeriod = 60 * 1000;
+        //避免影响APP启动速度
+        Beta.initDelay = 1 * 1000;
+        Beta.smallIconId = R.mipmap.logo_jiu_black_mini;
         Bugly.init(getApplicationContext(), "ab82a4ef2b", false);
     }
 

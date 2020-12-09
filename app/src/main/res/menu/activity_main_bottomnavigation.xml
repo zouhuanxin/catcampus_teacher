@@ -15,6 +15,6 @@
         <item
             android:id="@+id/hot"
             android:icon="@mipmap/comment"
-            android:title="热点" />
+            android:title="推荐" />
     </group>
 </menu>

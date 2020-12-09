@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.gyf.immersionbar.ImmersionBar;
 import com.jvtc.catcampus_teacher.R;
+import com.jvtc.catcampus_teacher.util.NavigationManager;
+
 public class X5WebViewActivity extends AppCompatActivity {
 
     private WebView forumContext;
@@ -25,7 +27,7 @@ public class X5WebViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ImmersionBar.with(this).statusBarColor("#f5f6f9").init();
+        NavigationManager.setStatusBarColor(this);
         setContentView(R.layout.activity_x5webview);
         initView();
     }

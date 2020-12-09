@@ -55,25 +55,6 @@ public class HomeFragment extends Fragment {
     }
 
     private void initData() {
-        homeViewModel.getBanners().observe(getViewLifecycleOwner(), new Observer<List<String>>() {
-            @Override
-            public void onChanged(List<String> strings) {
-                homeBanner.setAdapter(new BannerImageAdapter<String>(strings) {
-                    @Override
-                    public void onBindView(BannerImageHolder holder, String data, int position, int size) {
-                        RoundedCornersTransform transform = new RoundedCornersTransform(holder.itemView.getContext(), 50);
-                        transform.setNeedCorner(true, true, true, true);
-                        RequestOptions options = new RequestOptions().placeholder(R.mipmap.logo_jiu_black_mini).transform(transform);
-                        Glide.with(holder.itemView)
-                                .load(data)
-                                .apply(options)
-                                .into(holder.imageView);
-                    }
-                });
-                homeBanner.setPageTransformer(new ScaleInTransformer());
-                homeBanner.start();
-            }
-        });
         homeViewModel.getHomeItems().observe(getViewLifecycleOwner(), new Observer<List<HomeItem>>() {
             @Override
             public void onChanged(List<HomeItem> homeItems) {
@@ -91,7 +72,27 @@ public class HomeFragment extends Fragment {
                 homeTotayactive.setText(String.valueOf(todayData.toDayNewUserNum));
             }
         });
+        homeViewModel.getHeadLivewData().observe(getViewLifecycleOwner(), new Observer<List<HomeViewModel.HeadItem>>() {
+            @Override
+            public void onChanged(List<HomeViewModel.HeadItem> headItems) {
+                homeBanner.setAdapter(new BannerImageAdapter<HomeViewModel.HeadItem>(headItems) {
+                    @Override
+                    public void onBindView(BannerImageHolder holder, HomeViewModel.HeadItem data, int position, int size) {
+                        RoundedCornersTransform transform = new RoundedCornersTransform(holder.itemView.getContext(), 50);
+                        transform.setNeedCorner(true, true, true, true);
+                        RequestOptions options = new RequestOptions().placeholder(R.mipmap.logo_jiu_black_mini).transform(transform);
+                        Glide.with(holder.itemView)
+                                .load(data.imageurl)
+                                .apply(options)
+                                .into(holder.imageView);
+                    }
+                });
+                homeBanner.setPageTransformer(new ScaleInTransformer());
+                homeBanner.start();
+            }
+        });
         homeViewModel.initTodayData();
+        homeViewModel.initHead();
     }
 
     private HomeItemAdapter.ItemClick itemClick = new HomeItemAdapter.ItemClick() {

@@ -95,4 +95,7 @@ public interface RxApis {
     @Headers("source:jiu-shi")
     Observable<JSONObject> getAllSystemNotice();
 
+    @GET("/getAllShufflingFigure")
+    @Headers("source:jiu-shi")
+    Observable<JSONObject> getAllShufflingFigure();
 }

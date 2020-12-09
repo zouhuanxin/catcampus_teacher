@@ -2,6 +2,8 @@ package com.jvtc.catcampus_teacher.util;
 
 import android.content.Context;
 import android.text.TextUtils;
+
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.jvtc.catcampus_teacher.data.model.LoggedInUser;
@@ -24,7 +26,7 @@ public class AppRepository {
         if (TextUtils.isEmpty(s)) {
             return null;
         }
-        LoggedInUser user = new Gson().fromJson(s, LoggedInUser.class);
+        LoggedInUser user = JSON.parseObject(s, LoggedInUser.class);
         return user;
     }
 

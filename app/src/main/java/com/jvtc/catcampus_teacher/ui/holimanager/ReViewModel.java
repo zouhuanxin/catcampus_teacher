@@ -94,7 +94,6 @@ public class ReViewModel extends ViewModel {
             @Override
             public void onNext(JSONObject jsonObject) {
                 try {
-                    System.out.println("jsonObject:"+jsonObject);
                     if (jsonObject.getInt("code") == 0) {
                         List<ReViewItem> list = new ArrayList<>();
                         JSONArray array = jsonObject.getJSONObject("data").getJSONArray("list");

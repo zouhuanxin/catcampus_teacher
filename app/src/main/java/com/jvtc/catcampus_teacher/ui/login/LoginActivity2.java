@@ -81,8 +81,16 @@ public class LoginActivity2 extends AppCompatActivity {
     }
 
     private void CheckXg() {
-        if (!TextUtils.isEmpty(LoginRepository.getInstance().getLoggedInUser().getCookie2())) {
-            //自动登录
+        //已存在登录信息时候，自动填写账号密码信息
+        if (LoginRepository.getInstance().getLoggedInUser().getCookie2() != null
+                && !TextUtils.isEmpty(LoginRepository.getInstance().getLoggedInUser().getCookie2())) {
+            password.setText(LoginRepository.getInstance().getLoggedInUser().getPassword2());
+        }
+        //自动登录
+        if (LoginRepository.getInstance().getLoggedInUser().getCookie2() != null
+                && !TextUtils.isEmpty(LoginRepository.getInstance().getLoggedInUser().getCookie2())
+                && LoginRepository.getInstance().getLoggedInUser().getAuto2() != null
+                && LoginRepository.getInstance().getLoggedInUser().getAuto2()) {
             login(LoginRepository.getInstance().getLoggedInUser().getPassword2());
         }
     }

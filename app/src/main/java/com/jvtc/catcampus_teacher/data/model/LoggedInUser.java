@@ -9,6 +9,8 @@ public class LoggedInUser {
     private String account;
     private String password; //教务系统密码
     private String password2; //学工平台密码
+    private Boolean isAuto; //教务系统自动登录 默认为true
+    private Boolean isAuto2; //学工平台自动登录 默认为true
 
     public String getCookie() {
         return cookie;
@@ -50,14 +52,21 @@ public class LoggedInUser {
         this.cookie2 = cookie2;
     }
 
-    @Override
-    public String toString() {
-        return "LoggedInUser{" +
-                "cookie='" + cookie + '\'' +
-                ", cookie2='" + cookie2 + '\'' +
-                ", account='" + account + '\'' +
-                ", password='" + password + '\'' +
-                ", password2='" + password2 + '\'' +
-                '}';
+    public Boolean getAuto() {
+        return isAuto;
     }
+
+    public void setAuto(Boolean auto) {
+        isAuto = auto;
+    }
+
+    public Boolean getAuto2() {
+        return isAuto2;
+    }
+
+    public void setAuto2(Boolean auto2) {
+        isAuto2 = auto2;
+    }
+
+
 }
