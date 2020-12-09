@@ -15,50 +15,50 @@ import rx.Observable;
 
 public interface RxApis {
 
-    @POST("/test/jwlogin")
+    @POST("test/jwlogin")
     @Headers("source:jiu-shi")
     Observable<JSONObject> login(@Body RequestBody req);
 
     //{"rq":"2020-12-01","cookie":"EE78A08EC6A32D1E1E038E3342456D66"}
-    @POST("/test/kcinfo")
+    @POST("test/kcinfo")
     @Headers("source:jiu-shi")
     Observable<JSONObject> getCourses(@Body RequestBody req);
 
     //https://jvtc.notbucai.com/jwxt/course/week
-    @GET("/jwxt/course/week")
+    @GET("jwxt/course/week")
     @Headers("User-Agent:jiu-shi")
     Observable<JSONObject> getWeek();
 
-    @GET("/jvtc/data")
+    @GET("jvtc/data")
     @Headers("User-Agent:jiu-shi")
     Observable<JSONObject> getData();
 
-    @POST("/test/teach_teach_info")
+    @POST("test/teach_teach_info")
     @Headers("source:jiu-shi")
     Observable<JSONObject> teach_teach_info(@Body RequestBody req);
 
-    @POST("/test/teach_hmc_info")
+    @POST("test/teach_hmc_info")
     @Headers("source:jiu-shi")
     Observable<JSONObject> teach_hmc_info(@Body RequestBody req);
 
-    @POST("/test/teach_classcourse_info")
+    @POST("test/teach_classcourse_info")
     @Headers("source:jiu-shi")
     Observable<JSONObject> teach_classcourse_info(@Body RequestBody req);
 
-    @POST("/test/teach_uploadpass_info")
+    @POST("test/teach_uploadpass_info")
     @Headers("source:jiu-shi")
     Observable<JSONObject> teach_uploadpass_info(@Body RequestBody req);
 
-    @POST("/jvtc/login")
+    @POST("jvtc/login")
     @Headers("User-Agent:jiu-shi")
     Observable<JSONObject> xglogin(@Body RequestBody req);
 
     //{'Authorization':'Bearer ' + token}
-    @GET("/jvtc/TeacherReSetpass")
+    @GET("jvtc/TeacherReSetpass")
     @Headers({"User-Agent:jiu-shi"})
     Observable<JSONObject> teacherReSetpass(@Header("Authorization") String token, @Query("StudentNo") String StudentNo);
 
-    @POST("/jvtc/TeacherChangePass")
+    @POST("jvtc/TeacherChangePass")
     @Headers({"User-Agent:jiu-shi","Content-Type:application/json"})
     Observable<JSONObject> teacherChangePass(@Header("Authorization") String token,@Body RequestBody req);
 
@@ -71,11 +71,11 @@ public interface RxApis {
      * @param req
      * @return
      */
-    @POST("/jvtc/FDYAllLeaveExam")
+    @POST("jvtc/FDYAllLeaveExam")
     @Headers({"User-Agent:jiu-shi","Content-Type:application/json"})
     Observable<JSONObject> FDYAllLeaveExam(@Header("Authorization") String token,@Body RequestBody req);
 
-    @GET("/jvtc/FDYAllLeaveExam_Edit")
+    @GET("jvtc/FDYAllLeaveExam_Edit")
     @Headers({"User-Agent:jiu-shi","Content-Type:application/json"})
     Observable<JSONObject> FDYAllLeaveExam_Edit(@Header("Authorization") String token,@Query("id") String id,@Query("type") String type);
 
@@ -87,15 +87,15 @@ public interface RxApis {
      * @param req
      * @return
      */
-    @POST("/jvtc/FDYDisAllLeave")
+    @POST("jvtc/FDYDisAllLeave")
     @Headers({"User-Agent:jiu-shi","Content-Type:application/json"})
     Observable<JSONObject> FDYDisAllLeave(@Header("Authorization") String token,@Body RequestBody req);
 
-    @GET("/getAllSystemNotice")
+    @GET("getAllSystemNotice")
     @Headers("source:jiu-shi")
     Observable<JSONObject> getAllSystemNotice();
 
-    @GET("/getAllShufflingFigure")
+    @GET("getAllShufflingFigure")
     @Headers("source:jiu-shi")
     Observable<JSONObject> getAllShufflingFigure();
 }

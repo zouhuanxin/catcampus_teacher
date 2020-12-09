@@ -53,7 +53,6 @@ public class LoginRepository {
     public void login(String account, String password, RxHttpCallBack httpCallBack) {
         JSONObject req = new JSONObject();
         try {
-            //bcl515516
             req.put("jwusername",account);
             req.put("jwpassword",password);
         } catch (JSONException e) {
