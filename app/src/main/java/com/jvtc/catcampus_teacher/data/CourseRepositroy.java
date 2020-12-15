@@ -55,7 +55,7 @@ public class CourseRepositroy {
                     @Override
                     public void onNext(JSONObject jsonObject) {
                         try {
-                            if (jsonObject.getInt("code") == 0) {
+                            if (jsonObject.getString("code").equals("0")) {
                                 String data = jsonObject.getString("data");
                                 httpCallBack.onSuccess(new Result.Success(new JSONArray(data)));
                             } else {

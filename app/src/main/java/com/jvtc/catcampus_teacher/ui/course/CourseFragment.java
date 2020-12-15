@@ -113,19 +113,15 @@ public class CourseFragment extends Fragment {
     }
 
     private void ChangeAdapter(List<CourseViewModel.CourseItem> list) {
-        if (courseAdapter == null) {
-            GridLayoutManager manager = new GridLayoutManager(getContext(), 8);
-            courseAdapter = new CourseAdapter(list, new CourseAdapter.ItemClick() {
-                @Override
-                public void click(HomeItem homeItem, int index) {
+        GridLayoutManager manager = new GridLayoutManager(getContext(), 8);
+        courseAdapter = new CourseAdapter(list, new CourseAdapter.ItemClick() {
+            @Override
+            public void click(HomeItem homeItem, int index) {
 
-                }
-            });
-            courserecy.setLayoutManager(manager);
-            courserecy.setAdapter(courseAdapter);
-        } else {
-            courseAdapter.notifyDataSetChanged();
-        }
+            }
+        });
+        courserecy.setLayoutManager(manager);
+        courserecy.setAdapter(courseAdapter);
         courseProgress.setVisibility(View.GONE);
     }
 }
