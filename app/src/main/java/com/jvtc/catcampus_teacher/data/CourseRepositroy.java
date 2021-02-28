@@ -72,6 +72,42 @@ public class CourseRepositroy {
     /**
      * 获取课表周次
      */
+    public void getWeek(String date,RxHttpCallBack httpCallBack){
+        JSONObject req = new JSONObject();
+        try {
+            req.put("rq", date);
+            req.put("cookie", LoginRepository.getInstance().getLoggedInUser().getCookie());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), req.toString());
+        HttpUtils.createHttp(HttpUtils.createRxRetrofit(HttpUtils.baseUrl).create(RxApis.class).getWeek(requestBody),
+                new HttpCallBack() {
+                    @Override
+                    public void onCompleted() {
+                        httpCallBack.onCompleted();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        httpCallBack.onError(new Result.Error(e, "请检查网络"));
+                    }
+
+                    @Override
+                    public void onNext(JSONObject jsonObject) {
+                        try {
+                            if (jsonObject.getString("code").equals("0")) {
+                                String data = jsonObject.getString("data");
+                                httpCallBack.onSuccess(new Result.Success(data));
+                            } else {
+                                httpCallBack.onError(new Result.Error(null, "暂无周次信息"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
     public void getWeek(RxHttpCallBack httpCallBack){
         HttpUtils.createHttp(HttpUtils.createRxRetrofit(HttpUtils.notbucaiUrl).create(RxApis.class).getWeek(), new HttpCallBack() {
             @Override

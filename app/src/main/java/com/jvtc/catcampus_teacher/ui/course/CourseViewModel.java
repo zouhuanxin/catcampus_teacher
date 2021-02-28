@@ -35,9 +35,9 @@ public class CourseViewModel extends ViewModel {
         return week;
     }
 
-    public void initCourses(String date,int index) {
-        if (index < 0 && week.getValue().currentWeek == 1){
-            courses.setValue(new CourseResult(null,"第一周了，不能再减了"));
+    public void initCourses(String date, int index) {
+        if (index < 0 && week.getValue().currentWeek == 1) {
+            courses.setValue(new CourseResult(null, "第一周了，不能再减了"));
             return;
         }
         CourseRepositroy.getInstance().getCourses(date, new RxHttpCallBack() {
@@ -48,16 +48,17 @@ public class CourseViewModel extends ViewModel {
 
             @Override
             public void onError(Result.Error data) {
-                if (data.getError() == null){
-                    if (index > 0){
-                        week.getValue().currentWeek = week.getValue().currentWeek + 1;
-                    } else if (index < 0 && week.getValue().currentWeek > 1){
-                        week.getValue().currentWeek = week.getValue().currentWeek - 1;
-                    }
+                if (data.getError() == null) {
+//                    if (index > 0) {
+//                        week.getValue().currentWeek = week.getValue().currentWeek + 1;
+//                    } else if (index < 0 && week.getValue().currentWeek > 1) {
+//                        week.getValue().currentWeek = week.getValue().currentWeek - 1;
+//                    }
                     week.getValue().currentDate = date;
+                    initWeekData();
                     week.setValue(week.getValue());
                 }
-                courses.setValue(new CourseResult(null,data.getMessage()));
+                courses.setValue(new CourseResult(null, data.getMessage()));
             }
 
             @Override
@@ -73,21 +74,27 @@ public class CourseViewModel extends ViewModel {
                         e.printStackTrace();
                     }
                     list.add(item);
-                    courses.setValue(new CourseResult(list,null));
+                    courses.setValue(new CourseResult(list, null));
                 }
-                if (index > 0){
-                    week.getValue().currentWeek = week.getValue().currentWeek + 1;
-                } else if (index < 0){
-                    week.getValue().currentWeek = week.getValue().currentWeek - 1;
-                }
+//                if (index > 0) {
+//                    week.getValue().currentWeek = week.getValue().currentWeek + 1;
+//                } else if (index < 0) {
+//                    week.getValue().currentWeek = week.getValue().currentWeek - 1;
+//                }
                 week.getValue().currentDate = date;
+                initWeekData();
                 week.setValue(week.getValue());
             }
         });
     }
 
-    public void initWeekData(){
-        CourseRepositroy.getInstance().getWeek(new RxHttpCallBack() {
+    public void initWeekData() {
+        String w = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        if (week.getValue() != null && week.getValue().currentDate != null) {
+            w = week.getValue().currentDate;
+        }
+        String finalW = w;
+        CourseRepositroy.getInstance().getWeek(w, new RxHttpCallBack() {
             @Override
             public void onCompleted() {
 
@@ -100,13 +107,16 @@ public class CourseViewModel extends ViewModel {
 
             @Override
             public void onSuccess(Result.Success data) {
-                JSONObject jsonObject = (JSONObject) data.getData();
+//                JSONObject jsonObject = (JSONObject) data.getData();
                 CourseWeek courseWeek = new CourseWeek();
+                String str = (String) data.getData();
                 try {
-                    courseWeek.totalWeek = jsonObject.getInt("totalWeek");
-                    courseWeek.currentWeek = jsonObject.getInt("currentWeek");
-                    courseWeek.currentDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-                } catch (JSONException e) {
+//                    courseWeek.totalWeek = jsonObject.getInt("totalWeek");
+//                    courseWeek.currentWeek = jsonObject.getInt("currentWeek");
+                    str = str.replace("\"", "").trim();
+                    courseWeek.info = str;
+                    courseWeek.currentDate = finalW;
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 week.setValue(courseWeek);
@@ -119,7 +129,7 @@ public class CourseViewModel extends ViewModel {
         public String kcname;
     }
 
-    class CourseResult{
+    class CourseResult {
         public List<CourseItem> courseItemList;
         public String error;
 
@@ -129,7 +139,8 @@ public class CourseViewModel extends ViewModel {
         }
     }
 
-    class CourseWeek{
+    class CourseWeek {
+        public String info;
         public int totalWeek;
         public int currentWeek;
         public String currentDate;

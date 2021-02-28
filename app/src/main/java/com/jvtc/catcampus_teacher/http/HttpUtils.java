@@ -20,6 +20,7 @@ import rx.schedulers.Schedulers;
 
 public class HttpUtils {
     public static String baseUrl = "https://jiu.notbucai.com/shi/api/";
+    //zpublic static String baseUrl = "http://192.168.123.196:8084/";
     public static String notbucaiUrl = "https://jvtc.notbucai.com/";
     public static String ncgameUrl = "https://api.ncgame.cc/";
 
@@ -34,7 +35,7 @@ public class HttpUtils {
                 public JSONObject convert(ResponseBody value) throws IOException {
                     JSONObject jsonObject = null;
                     try {
-                         jsonObject = new JSONObject(value.string());
+                        jsonObject = new JSONObject(value.string());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -61,7 +62,7 @@ public class HttpUtils {
             readTimeout(60, TimeUnit.SECONDS).
             writeTimeout(60, TimeUnit.SECONDS).build();
 
-    public static synchronized Retrofit createRxRetrofit(String baseUrl){
+    public static synchronized Retrofit createRxRetrofit(String baseUrl) {
         return new Retrofit.Builder()
                 .client(client)
                 .baseUrl(baseUrl)
@@ -71,7 +72,7 @@ public class HttpUtils {
                 .build();
     }
 
-    public static void createHttp(Observable<JSONObject> call,HttpCallBack httpCallBack){
+    public static void createHttp(Observable<JSONObject> call, HttpCallBack httpCallBack) {
         call.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<JSONObject>() {
@@ -92,7 +93,6 @@ public class HttpUtils {
                     }
                 });
     }
-
 
 
 }

@@ -1,6 +1,7 @@
 package com.jvtc.catcampus_teacher.ui.course;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +60,7 @@ public class CourseFragment extends Fragment {
             public void onClick(View v) {
                 courseProgress.setVisibility(View.VISIBLE);
                 operationDate(-7);
-                courseViewModel.initCourses(currentdate,-7);
+                courseViewModel.initCourses(currentdate, -7);
             }
         });
         nextweek.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +68,7 @@ public class CourseFragment extends Fragment {
             public void onClick(View v) {
                 courseProgress.setVisibility(View.VISIBLE);
                 operationDate(7);
-                courseViewModel.initCourses(currentdate,7);
+                courseViewModel.initCourses(currentdate, 7);
             }
         });
     }
@@ -76,7 +77,7 @@ public class CourseFragment extends Fragment {
         courseViewModel.getWeek().observe(getViewLifecycleOwner(), new Observer<CourseViewModel.CourseWeek>() {
             @Override
             public void onChanged(CourseViewModel.CourseWeek courseWeek) {
-                thisweek.setText("第" + courseWeek.currentWeek + "周\n" + courseWeek.currentDate);
+                thisweek.setText(courseWeek.info + "\n" + courseWeek.currentDate);
             }
         });
         courseViewModel.getCourses().observe(getViewLifecycleOwner(), new Observer<CourseViewModel.CourseResult>() {
@@ -94,7 +95,7 @@ public class CourseFragment extends Fragment {
             }
         });
         courseViewModel.initWeekData();
-        courseViewModel.initCourses(currentdate,0);
+        courseViewModel.initCourses(currentdate, 0);
     }
 
     private void operationDate(int index) {

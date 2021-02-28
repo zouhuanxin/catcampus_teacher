@@ -24,6 +24,15 @@ public interface RxApis {
     @Headers("source:jiu-shi")
     Observable<JSONObject> getCourses(@Body RequestBody req);
 
+    /**
+     * 2021-02-28
+     * @param req
+     * @return
+     */
+    @POST("test/kcweek")
+    @Headers("source:jiu-shi")
+    Observable<JSONObject> getWeek(@Body RequestBody req);
+
     //https://jvtc.notbucai.com/jwxt/course/week
     @GET("jwxt/course/week")
     @Headers("User-Agent:jiu-shi")
