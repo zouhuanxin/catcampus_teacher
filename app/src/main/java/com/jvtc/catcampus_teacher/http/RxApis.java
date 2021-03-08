@@ -1,5 +1,8 @@
 package com.jvtc.catcampus_teacher.http;
 
+import com.jvtc.catcampus_teacher.data.model.NetModel;
+import com.jvtc.catcampus_teacher.data.model.NetModel2;
+
 import org.json.JSONObject;
 
 import java.util.Map;
@@ -107,4 +110,14 @@ public interface RxApis {
     @GET("getAllShufflingFigure")
     @Headers("source:jiu-shi")
     Observable<JSONObject> getAllShufflingFigure();
+
+    /**
+     * 获取校园卡流水
+     * @param userId
+     * @param pageIndex
+     * @return
+     */
+    @GET("/public/yktxf")
+    @Headers("source:jiu-shi")
+    Observable<NetModel2> yktxf(@Query("userId") String userId, @Query("pageIndex") int pageIndex);
 }

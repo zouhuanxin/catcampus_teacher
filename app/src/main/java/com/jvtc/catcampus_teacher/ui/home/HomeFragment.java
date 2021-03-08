@@ -14,6 +14,7 @@ import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,7 +23,9 @@ import com.bumptech.glide.request.RequestOptions;
 import com.jvtc.catcampus_teacher.MainActivity;
 import com.jvtc.catcampus_teacher.R;
 import com.jvtc.catcampus_teacher.data.model.HomeItem;
+import com.jvtc.catcampus_teacher.data.model.NetModel;
 import com.jvtc.catcampus_teacher.ui.ClassQuery.ClassQueryActivity;
+import com.jvtc.catcampus_teacher.ui.home.campusCard.CampusCardActivity;
 import com.jvtc.catcampus_teacher.ui.login.LoginActivity2;
 import com.jvtc.catcampus_teacher.ui.roster.RosterActivity;
 import com.jvtc.catcampus_teacher.ui.updatepass.JwUpdatepassActivity;
@@ -124,6 +127,11 @@ public class HomeFragment extends Fragment {
                     break;
                 case "学工密码修改":
                     JumpTarget("学工密码修改");
+                    break;
+                case "校园卡流水":
+                    //获取学号查询流水
+                    intent = new Intent(getActivity(), CampusCardActivity.class);
+                    startActivity(intent);
                     break;
             }
         }

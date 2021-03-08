@@ -1,13 +1,24 @@
 package com.jvtc.catcampus_teacher.ui.home;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.paging.ItemKeyedDataSource;
+import androidx.paging.LivePagedListBuilder;
+import androidx.paging.PageKeyedDataSource;
+import androidx.paging.PagedList;
+import androidx.paging.PositionalDataSource;
 
 import com.jvtc.catcampus_teacher.R;
 import com.jvtc.catcampus_teacher.data.HomeRepsitory;
+import com.jvtc.catcampus_teacher.data.PageDataSourceFactory;
 import com.jvtc.catcampus_teacher.data.Result;
 import com.jvtc.catcampus_teacher.data.model.HomeItem;
+import com.jvtc.catcampus_teacher.data.model.NetModel;
+import com.jvtc.catcampus_teacher.data.model.NetModel2;
+import com.jvtc.catcampus_teacher.http.OkHttps;
+import com.jvtc.catcampus_teacher.http.RxApis;
 import com.jvtc.catcampus_teacher.http.RxHttpCallBack;
 
 import org.json.JSONArray;
@@ -17,6 +28,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
 public class HomeViewModel extends ViewModel {
 
     private MutableLiveData<List<HomeItem>> homeItems;
@@ -24,9 +39,9 @@ public class HomeViewModel extends ViewModel {
     private MutableLiveData<List<HeadItem>> headLivewData;
 
     public HomeViewModel() {
-
         homeItems = new MutableLiveData<>();
         homeItems.setValue(new ArrayList<>());
+        homeItems.getValue().add(new HomeItem(10, R.mipmap.card, "校园卡流水"));
         homeItems.getValue().add(new HomeItem(0, R.mipmap.bjhmc, "班级花名册"));
         // homeItems.getValue().add(new HomeItem(1, R.mipmap.jskbcx,"教师课表查询"));
         homeItems.getValue().add(new HomeItem(2, R.mipmap.jskbcx2, "教室课表查询"));

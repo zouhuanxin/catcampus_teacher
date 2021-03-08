@@ -38,6 +38,7 @@ import java.util.List;
  * 8。日常销假管理
  * 9。学工密码修改
  * 10。当前课表查询
+ * 11。饭卡流水
  */
 public class MainActivity extends AppCompatActivity {
     private List<Fragment> fragments;
